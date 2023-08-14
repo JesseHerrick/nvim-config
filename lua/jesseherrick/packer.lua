@@ -41,13 +41,19 @@ return require('packer').startup(function(use)
 		}
 	}
 
-	use {
+	use({
 		'nvim-tree/nvim-tree.lua',
 		requires = {
 			'nvim-tree/nvim-web-devicons', -- optional
 		}
-	}
+	})
 
 	use('tpope/vim-commentary')
 	use('tpope/vim-surround')
+
+	use({
+		"elixir-tools/elixir-tools.nvim",
+		tag = "stable",
+		requires = { "nvim-lua/plenary.nvim" }
+	})
 end)

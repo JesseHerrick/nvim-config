@@ -5,7 +5,6 @@ lsp.nvim_workspace()
 lsp.preset('recommended')
 
 lsp.ensure_installed({
-	'elixirls',
 	'gopls'
 })
 
