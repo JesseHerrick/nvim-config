@@ -1,4 +1,4 @@
-vim.keymap.set("x", "<C-g>", "<Esc>", { noremap = true })
+vim.keymap.set("x", "<C-g>", "<Esc>")
 vim.keymap.set("n", "<leader>fs", vim.cmd.w)
 
 -- window/split navigation
