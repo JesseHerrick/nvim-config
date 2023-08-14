@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>ff", vim.cmd.Ex)
+vim.keymap.set("x", "<C-g>", "<Esc>", {noremap = true})
 vim.keymap.set("n", "<leader>fs", vim.cmd.w)
 
 -- window/split navigation
@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>1", "<C-w>h")
 vim.keymap.set("n", "<leader>2", "<C-w>l")
 vim.keymap.set("n", "<leader>j", "<C-w>j")
 vim.keymap.set("n", "<leader>k", "<C-w>k")
-vim.keymap.set("n", "<leader>q", function() vim.cmd("q") end)
+vim.keymap.set("n", "<leader>q", vim.cmd.q)
 
 -- remap all the things to escape
 vim.keymap.set("i", "jk", "<Esc>", {noremap = true})
