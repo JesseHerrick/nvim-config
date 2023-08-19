@@ -13,9 +13,44 @@ vim.keymap.set("n", "<leader>|", vim.cmd.vsplit)
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true })
 vim.keymap.set({ "n", "i", "v" }, "<C-g>", "<Esc>", { noremap = true })
 
+-- quickfix
+vim.keymap.set("n", "<leader>'", function()
+	vim.cmd("copen")
+end)
+vim.keymap.set("n", "<leader>cn", function()
+	vim.cmd("cnext")
+	"zz"
+end)
+
+vim.keymap.set("n", "<leader>cp", function()
+	vim.cmd("cprev")
+	"zz"
+end)
+
 -- useful remaps
-vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+
+function yank(stuff)
+	vim.fn.setreg('+', { stuff })
+
+	print("Yanked:", stuff)
+end
+
+-- grab the current file and line number
+vim.keymap.set("n", "<leader>y", function()
+	local current_file = vim.fn.expand('%')
+	local current_line = vim.fn.line('.')
+	local file_and_line = current_file .. ':' .. current_line
+
+	yank(file_and_line)
+end)
+
+vim.keymap.set("n", "<leader>Y", function()
+	yank(vim.fn.expand('%'))
+end)
+
+-- paste over stuff!
+vim.keymap.set("x", "<leader>p", [["_dP]])

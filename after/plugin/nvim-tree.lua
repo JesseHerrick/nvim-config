@@ -11,8 +11,10 @@ require("nvim-tree").setup({
 		group_empty = true,
 	},
 	filters = {
-		dotfiles = true,
+		dotfiles = false,
 	},
 })
 
-vim.keymap.set("n", "<leader><Tab>", function() vim.cmd("NvimTreeToggle") end)
+local api = require("nvim-tree.api")
+
+vim.keymap.set("n", "<leader><Tab>", function() api.tree.toggle({ find_file = true }) end)
