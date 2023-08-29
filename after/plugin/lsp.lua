@@ -9,32 +9,39 @@ lsp.ensure_installed({
 })
 
 local lspconfig = require("lspconfig")
-local configs = require("lspconfig.configs")
 
-local lexical_config = {
-	filetypes = { "elixir", "eelixir", },
-	cmd = { os.getenv("HOME") .. "/code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
-	settings = {},
-}
+-- LEXICAL
+-- local configs = require("lspconfig.configs")
 
-if not configs.lexical then
-	configs.lexical = {
-		default_config = {
-			filetypes = lexical_config.filetypes,
-			cmd = lexical_config.cmd,
-			root_dir = function(fname)
-				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-			end,
-			-- optional settings
-			settings = lexical_config.settings,
-		},
-	}
-end
+-- local lexical_config = {
+-- 	filetypes = { "elixir", "eelixir", },
+-- 	cmd = { os.getenv("HOME") .. "/code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+-- 	settings = {},
+-- }
 
-lspconfig.lexical.setup({})
+-- if not configs.lexical then
+-- 	configs.lexical = {
+-- 		default_config = {
+-- 			filetypes = lexical_config.filetypes,
+-- 			cmd = lexical_config.cmd,
+-- 			root_dir = function(fname)
+-- 				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+-- 			end,
+-- 			-- optional settings
+-- 			settings = lexical_config.settings,
+-- 		},
+-- 	}
+-- end
+
+-- lspconfig.lexical.setup({})
 
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
+
+	-- disable formatting by elixirls
+	if client.name == "elixirls" and client.server_capabilities then
+		client.server_capabilities.documentFormattingProvider = false
+	end
 
 	vim.keymap.set("n", "<leader>va", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "<leader>vo", function() vim.lsp.buf.references() end, opts)
@@ -47,9 +54,11 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
 	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+	vim.keymap.set("n", "<leader>fb", function() vim.lsp.buf.formatting() end, opts)
 
 	lsp.buffer_autoformat()
 end)
+
 
 lsp.setup()
 

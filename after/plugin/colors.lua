@@ -3,6 +3,7 @@ function SetColorSchema(color)
 end
 
 vim.g.gruvbox_material_foreground = 'mix'
+vim.g.gruvbox_material_background = 'hard'
 
 local grpid = vim.api.nvim_create_augroup('custom_highlights_gruvboxmaterial', {})
 

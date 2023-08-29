@@ -16,8 +16,27 @@ require("lazy").setup({
 	'nvim-lua/plenary.nvim',
 
 	"folke/which-key.nvim",
-	{ "folke/neoconf.nvim",              cmd = "Neoconf" },
-	-- "folke/neodev.nvim",
+
+	{
+		"folke/neoconf.nvim",
+		cmd = "Neoconf"
+	},
+
+	"folke/neodev.nvim",
+	"tpope/vim-dispatch",
+
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim"
+		}
+	},
+	-- {
+	-- 	"jfpedroza/neotest-elixir",
+	-- 	dependencies = { "nvim-neotest/neotest" }
+	-- },
 
 	{
 		'nvim-telescope/telescope.nvim',
@@ -73,7 +92,7 @@ require("lazy").setup({
 			local elixirls = require("elixir.elixirls")
 
 			elixir.setup {
-				nextls = { enable = false },
+				nextls = { enable = true },
 				credo = {},
 				elixirls = {
 					enable = false,
@@ -94,17 +113,23 @@ require("lazy").setup({
 		},
 	},
 	{
-		"danielfalk/smart-open.nvim",
-		branch = "0.2.x",
+		"nvim-telescope/telescope-frecency.nvim",
 		config = function()
-			require("telescope").load_extension("smart_open")
+			require "telescope".load_extension("frecency")
 		end,
-		dependencies = {
-			"kkharji/sqlite.lua",
-			-- Only required if using match_algorithm fzf
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			-- Optional.  If installed, native fzy will be used when match_algorithm is fzy
-			{ "nvim-telescope/telescope-fzy-native.nvim" },
-		},
+		dependencies = { "kkharji/sqlite.lua" }
+	},
+	{
+		'prochri/telescope-all-recent.nvim',
+		config = function()
+			require('telescope-all-recent').setup {
+				-- your config goes here
+			}
+		end
+	},
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 	}
 })
