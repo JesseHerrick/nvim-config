@@ -10,9 +10,11 @@ vim.keymap.set("n", "<leader>q", vim.cmd.q)
 vim.keymap.set("n", "<leader>|", vim.cmd.vsplit)
 
 -- tab navigation
-vim.keymap.set("n", "<C-I><C-I>", function()
-	vim.cmd("tabnext")
-end)
+--
+-- this doesn't work right because it makes using `C-i` for navigation slow
+-- vim.keymap.set("n", "<C-I><C-I>", function()
+-- 	vim.cmd("tabnext")
+-- end)
 
 -- remap all the things to escape
 vim.keymap.set("i", "jk", "<Esc>", { noremap = true })
