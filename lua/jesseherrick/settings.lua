@@ -20,3 +20,8 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = nil -- "120"
+
+
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.cmd('autocmd BufReadPost,FileReadPost * normal zR')

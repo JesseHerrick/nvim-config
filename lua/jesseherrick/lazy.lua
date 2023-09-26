@@ -57,6 +57,7 @@ require("lazy").setup({
 	'mbbill/undotree',
 	'tpope/vim-fugitive',
 
+	'mhartington/formatter.nvim',
 	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
@@ -79,10 +80,31 @@ require("lazy").setup({
 			'nvim-tree/nvim-web-devicons', -- optional
 		}
 	},
-
 	'tpope/vim-commentary',
 	'tpope/vim-surround',
 	'tpope/vim-projectionist',
+	'sindrets/diffview.nvim',
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require "telescope".load_extension("frecency")
+		end,
+		dependencies = { "kkharji/sqlite.lua" }
+	},
+	{
+		'prochri/telescope-all-recent.nvim',
+		config = function()
+			require('telescope-all-recent').setup {
+				-- your config goes here
+			}
+		end
+	},
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	}
+
 	-- {
 	-- 	"elixir-tools/elixir-tools.nvim",
 	-- 	version = "*",
@@ -112,24 +134,4 @@ require("lazy").setup({
 	-- 		"nvim-lua/plenary.nvim",
 	-- 	},
 	-- },
-	{
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require "telescope".load_extension("frecency")
-		end,
-		dependencies = { "kkharji/sqlite.lua" }
-	},
-	{
-		'prochri/telescope-all-recent.nvim',
-		config = function()
-			require('telescope-all-recent').setup {
-				-- your config goes here
-			}
-		end
-	},
-	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build =
-		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-	}
 })

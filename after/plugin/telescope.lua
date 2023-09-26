@@ -19,6 +19,7 @@ require("telescope").setup({
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,
 				["<C-h>"] = "which_key",
+				["<C-q>"] = require("telescope.actions").send_selected_to_qflist
 			}
 		}
 	},
@@ -32,6 +33,11 @@ require("telescope").setup({
 		-- 	override_file_sorter = true,
 		-- 	case_mode = "smart_case",
 		-- },
+	},
+	pickers = {
+		find_files = {
+			hidden = true
+		}
 	}
 })
 

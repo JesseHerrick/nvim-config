@@ -34,6 +34,7 @@ if not configs.lexical then
 end
 
 lspconfig.lexical.setup({})
+
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
@@ -55,9 +56,8 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
 	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-	vim.keymap.set("n", "<leader>fb", function() vim.lsp.buf.formatting() end, opts)
+	-- vim.keymap.set("n", "<leader>fb", function() vim.lsp.buf.formatting end, opts)
 end)
-
 
 lsp.setup()
 

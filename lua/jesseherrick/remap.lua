@@ -35,13 +35,13 @@ vim.keymap.set("n", "<leader>cp", function()
 end)
 
 -- useful remaps
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz")
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 function yank(stuff)
-	vim.fn.setreg('+', { stuff })
+	vim.fn.setreg('+', stuff)
 
 	print("Yanked:", stuff)
 end
