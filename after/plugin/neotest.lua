@@ -1,9 +1,12 @@
--- require("neotest").setup({
--- 	adapters = {
--- 		require("neotest-elixir")
--- 	},
--- })
+require("neotest").setup({
+	adapters = {
+		require("neotest-elixir")
+	},
+	status = {
+		enabled = false
+	}
+})
 
--- vim.keymap.set("n", "rl", function() require("neotest").run.run() end)
--- vim.keymap.set("n", "rf", function() require("neotest").run.run(vim.fn.expand("%")) end)
--- vim.keymap.set("n", "rq", function() require("neotest").run.stop() end)
+vim.keymap.set("n", "tl", function() require("neotest").run.run() end)
+vim.keymap.set("n", "tf", function() require("neotest").run.run(vim.fn.expand("%")) end)
+vim.keymap.set("n", "tq", function() require("neotest").run.stop() end)

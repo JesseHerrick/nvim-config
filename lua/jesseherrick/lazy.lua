@@ -33,10 +33,10 @@ require("lazy").setup({
 			"antoinemadec/FixCursorHold.nvim"
 		}
 	},
-	-- {
-	-- 	"jfpedroza/neotest-elixir",
-	-- 	dependencies = { "nvim-neotest/neotest" }
-	-- },
+	{
+		"jfpedroza/neotest-elixir",
+		dependencies = { "nvim-neotest/neotest" }
+	},
 
 	{
 		'nvim-telescope/telescope.nvim',
@@ -56,6 +56,14 @@ require("lazy").setup({
 	'ThePrimeagen/harpoon',
 	'mbbill/undotree',
 	'tpope/vim-fugitive',
+
+	{
+		'hrsh7th/nvim-cmp',
+		dependencies = {
+			'L3MON4D3/LuaSnip',
+			'saadparwaiz1/cmp_luasnip',
+		}
+	},
 
 	'mhartington/formatter.nvim',
 	{
@@ -103,35 +111,31 @@ require("lazy").setup({
 		'nvim-telescope/telescope-fzf-native.nvim',
 		build =
 		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	},
+
+	{
+		"Exafunction/codeium.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({
+			})
+		end
+	},
+
+	{
+		"harrisoncramer/gitlab.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+			enabled = true,
+		},
+		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+		config = function()
+			require("gitlab").setup()                                -- Uses delta reviewer by default
+		end,
 	}
-
-	-- {
-	-- 	"elixir-tools/elixir-tools.nvim",
-	-- 	version = "*",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- 	config = function()
-	-- 		local elixir = require("elixir")
-	-- 		local elixirls = require("elixir.elixirls")
-
-	-- 		elixir.setup {
-	-- 			nextls = { enable = true },
-	-- 			credo = {},
-	-- 			elixirls = {
-	-- 				enable = false,
-	-- 				settings = elixirls.settings {
-	-- 					dialyzerEnabled = false,
-	-- 					enableTestLenses = true,
-	-- 				},
-	-- 				on_attach = function(client, bufnr)
-	-- 					vim.keymap.set("n", "<leader>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-	-- 					vim.keymap.set("n", "<leader>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-	-- 					vim.keymap.set("v", "<leader>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-	-- 				end,
-	-- 			}
-	-- 		}
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 	},
-	-- },
 })

@@ -19,7 +19,7 @@ require("telescope").setup({
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,
 				["<C-h>"] = "which_key",
-				["<C-q>"] = require("telescope.actions").send_selected_to_qflist
+				["<C-s>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist
 			}
 		}
 	},

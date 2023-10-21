@@ -9,6 +9,12 @@ require("formatter").setup {
 	filetype = {
 		javascript = {
 			require("formatter/defaults/prettier")
+		},
+		typescript = {
+			require("formatter/defaults/prettier")
+		},
+		typescriptreact = {
+			require("formatter/defaults/prettier")
 		}
 	}
 }
