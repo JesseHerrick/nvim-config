@@ -15,6 +15,9 @@ require("formatter").setup {
 		},
 		typescriptreact = {
 			require("formatter/defaults/prettier")
+		},
+		elixir = {
+			require("formatter.filetypes.elixir").mixformat
 		}
 	}
 }

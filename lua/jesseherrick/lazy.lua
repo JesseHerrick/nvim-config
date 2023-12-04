@@ -113,17 +113,43 @@ require("lazy").setup({
 		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 	},
 
+	-- {
+	-- 	"harrisoncramer/gitlab.nvim",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+	-- 		enabled = true,
+	-- 	},
+	-- 	build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+	-- 	config = function()
+	-- 		require("gitlab").setup()                                -- Uses delta reviewer by default
+	-- 	end,
+	-- },
 	{
-		"harrisoncramer/gitlab.nvim",
+		'nvim-orgmode/orgmode',
 		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
-			enabled = true,
+			{ 'nvim-treesitter/nvim-treesitter', lazy = true },
 		},
-		build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+		event = 'VeryLazy',
 		config = function()
-			require("gitlab").setup()                                -- Uses delta reviewer by default
+			-- Load treesitter grammar for org
+			require('orgmode').setup_ts_grammar()
+
+			-- Setup treesitter
+			require('nvim-treesitter.configs').setup({
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = { 'org' },
+				},
+				ensure_installed = { 'org' },
+			})
+
+			-- Setup orgmode
+			require('orgmode').setup({
+				org_agenda_files = '~/notes/**/*',
+				org_default_notes_file = '~/notes/refile.org',
+			})
 		end,
 	}
 })
