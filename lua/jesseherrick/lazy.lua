@@ -51,7 +51,7 @@ require("lazy").setup({
 		priority = 1000
 	},
 
-	{ 'nvim-treesitter/nvim-treesitter', build = { ':TSUpdate' } },
+	{ 'nvim-treesitter/nvim-treesitter',        build = { ':TSUpdate' } },
 	'nvim-treesitter/playground',
 	'ThePrimeagen/harpoon',
 	'mbbill/undotree',
@@ -151,5 +151,7 @@ require("lazy").setup({
 				org_default_notes_file = '~/notes/refile.org',
 			})
 		end,
-	}
+	},
+
+	{ "nvim-treesitter/nvim-treesitter-context" },
 })

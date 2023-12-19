@@ -21,6 +21,11 @@ vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = nil -- "120"
 
+-- folding
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.cmd [[autocmd BufReadPost,FileReadPost * normal zR]]
+
 -- autoformat
 vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
