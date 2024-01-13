@@ -51,7 +51,7 @@ require("lazy").setup({
 		priority = 1000
 	},
 
-	{ 'nvim-treesitter/nvim-treesitter',        build = { ':TSUpdate' } },
+	{ 'nvim-treesitter/nvim-treesitter',            build = { ':TSUpdate' } },
 	'nvim-treesitter/playground',
 	'ThePrimeagen/harpoon',
 	'mbbill/undotree',
@@ -154,4 +154,5 @@ require("lazy").setup({
 	},
 
 	{ "nvim-treesitter/nvim-treesitter-context" },
+	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 })

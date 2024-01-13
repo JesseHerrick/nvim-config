@@ -7,15 +7,15 @@ require("formatter").setup {
 	log_level = vim.log.levels.WARN,
 	-- All formatter configurations are opt-in
 	filetype = {
-		javascript = {
-			require("formatter/defaults/prettier")
-		},
-		typescript = {
-			require("formatter/defaults/prettier")
-		},
-		typescriptreact = {
-			require("formatter/defaults/prettier")
-		},
+		-- javascript = {
+		-- 	require("formatter/defaults/prettier")
+		-- },
+		-- typescript = {
+		-- 	require("formatter/defaults/prettier")
+		-- },
+		-- typescriptreact = {
+		-- 	require("formatter/defaults/prettier")
+		-- },
 		elixir = {
 			require("formatter.filetypes.elixir").mixformat
 		}
