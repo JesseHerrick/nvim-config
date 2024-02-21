@@ -55,7 +55,16 @@ require("lazy").setup({
 	'nvim-treesitter/playground',
 	'ThePrimeagen/harpoon',
 	'mbbill/undotree',
-	'tpope/vim-fugitive',
+	-- 'tpope/vim-fugitive',
+	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",      -- required
+			"sindrets/diffview.nvim",     -- optional - Diff integration
+			"nvim-telescope/telescope.nvim", -- optional
+		},
+		config = true
+	},
 
 	{
 		'hrsh7th/nvim-cmp',
@@ -155,4 +164,6 @@ require("lazy").setup({
 
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
+	{ "shaunsingh/solarized.nvim" },
+	{ "FabijanZulj/blame.nvim" }
 })
