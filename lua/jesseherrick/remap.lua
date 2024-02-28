@@ -40,24 +40,81 @@ end)
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-function yank(stuff)
+function Yank(stuff)
 	vim.fn.setreg('+', stuff)
 
 	print("Yanked:", stuff)
 end
 
+-- paste over stuff!
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- YANKS
+
 -- grab the current file and line number
-vim.keymap.set("n", "<leader>y", function()
+--
+-- think: "yank file"
+vim.keymap.set("n", "<leader>yf", function()
 	local current_file = vim.fn.expand('%')
 	local current_line = vim.fn.line('.')
 	local file_and_line = current_file .. ':' .. current_line
 
-	yank(file_and_line)
+	Yank(file_and_line)
 end)
 
-vim.keymap.set("n", "<leader>Y", function()
-	yank(vim.fn.expand('%'))
+-- grabs the absolute file path
+--
+-- think: "yank File" (absolute)
+vim.keymap.set("n", "<leader>yF", function()
+	Yank(vim.fn.expand('%'))
 end)
 
--- paste over stuff!
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- grab Elixir module
+
+local function get_full_elixir_module()
+	local first_line = vim.fn.getline(1)
+
+	return first_line:match("defmodule%s+([%w_%.]+)%s+do")
+end
+
+local function extract_elixir_module_parts(full_module_name)
+	if full_module_name then
+		local module_parts = {}
+
+		for part in full_module_name:gmatch("([^%.]+)") do
+			table.insert(module_parts, part)
+		end
+
+		return module_parts
+	else
+		return nil
+	end
+end
+
+
+-- yank local module name
+vim.keymap.set("n", "<leader>ym", function()
+	local filetype = vim.bo.filetype
+
+	if filetype == "elixir" then
+		local full_module_name = get_full_elixir_module()
+		local module_parts = extract_elixir_module_parts(full_module_name)
+
+		if module_parts then
+			local last_part = module_parts[#module_parts]
+
+			Yank(last_part)
+		end
+	end
+end)
+
+-- yank full module name
+vim.keymap.set("n", "<leader>yM", function()
+	local filetype = vim.bo.filetype
+
+	if filetype == "elixir" then
+		local full_module_name = get_full_elixir_module()
+
+		Yank(full_module_name)
+	end
+end)

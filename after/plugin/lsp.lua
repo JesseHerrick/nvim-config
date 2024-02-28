@@ -38,8 +38,11 @@ lspconfig.lexical.setup({})
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 
-	-- disable formatting by elixirls
-	if client.name == "lexical" and client.server_capabilities then
+	-- disable formatting by Lexical or ElixirLS
+	--
+	-- The LSP formatters tend to be slow and synchronous, which locks up the editor. The neoformat plugin does this same
+	-- work in the background and much faster.
+	if (client.name == "lexical" or client.name == "elixirls") and client.server_capabilities then
 		client.server_capabilities.documentFormattingProvider = false
 	else
 		lsp.buffer_autoformat()

@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 		-- ':TSHighlightCapturesUnderCursor' will tell the correct match to use for color correction.
 		vim.cmd('highlight! link @module.elixir AquaBold')
 		vim.cmd('highlight! link @constant Purple')
+		vim.cmd('highlight! link @string.special.symbol Yellow')
 	end
 })
 
