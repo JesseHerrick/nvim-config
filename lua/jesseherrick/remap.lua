@@ -91,30 +91,42 @@ local function extract_elixir_module_parts(full_module_name)
 	end
 end
 
+local function current_elixir_module(return_full_module)
+	local full_module_name = get_full_elixir_module()
 
--- yank local module name
-vim.keymap.set("n", "<leader>ym", function()
-	local filetype = vim.bo.filetype
-
-	if filetype == "elixir" then
-		local full_module_name = get_full_elixir_module()
+	if return_full_module then
+		return full_module_name
+	else
 		local module_parts = extract_elixir_module_parts(full_module_name)
 
 		if module_parts then
-			local last_part = module_parts[#module_parts]
-
-			Yank(last_part)
+			return module_parts[#module_parts]
 		end
+	end
+end
+
+function CurrentModule(return_full_module)
+	local filetype = vim.bo.filetype
+
+	if filetype == "elixir" then
+		return current_elixir_module(return_full_module)
+	end
+end
+
+-- yank local module name
+vim.keymap.set("n", "<leader>ym", function()
+	local module = CurrentModule(false)
+
+	if module then
+		Yank(module)
 	end
 end)
 
 -- yank full module name
 vim.keymap.set("n", "<leader>yM", function()
-	local filetype = vim.bo.filetype
+	local module = CurrentModule(true)
 
-	if filetype == "elixir" then
-		local full_module_name = get_full_elixir_module()
-
-		Yank(full_module_name)
+	if module then
+		Yank(module)
 	end
 end)
