@@ -10,7 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 
--- Bootstap hotpot into lazy plugin dir if it does not exist yet.
+-- Bootstrap hotpot into lazy plugin dir if it does not exist yet.
 local hotpotpath = vim.fn.stdpath("data") .. "/lazy/hotpot.nvim"
 if not vim.loop.fs_stat(hotpotpath) then
 	vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)
@@ -26,7 +26,7 @@ if not vim.loop.fs_stat(hotpotpath) then
 	})
 end
 
--- As per lazy's install instructions, but insert hotpots path at the front
+-- As per lazy's install instructions, but puts hotpot's path at the front.
 vim.opt.runtimepath:prepend({ hotpotpath, lazypath })
 
 require("hotpot")
@@ -42,18 +42,18 @@ require("lazy").setup({
 	{ "folke/neodev.nvim" },
 	{ "tpope/vim-dispatch" },
 
-	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim"
-		}
-	},
-	{
-		"jfpedroza/neotest-elixir",
-		dependencies = { "nvim-neotest/neotest" }
-	},
+	-- {
+	-- 	"nvim-neotest/neotest",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"antoinemadec/FixCursorHold.nvim"
+	-- 	}
+	-- },
+	-- {
+	-- 	"jfpedroza/neotest-elixir",
+	-- 	dependencies = { "nvim-neotest/neotest" }
+	-- },
 
 	{
 		'nvim-telescope/telescope.nvim',
@@ -152,36 +152,10 @@ require("lazy").setup({
 	-- 		require("gitlab").setup()                                -- Uses delta reviewer by default
 	-- 	end,
 	-- },
-	{
-		'nvim-orgmode/orgmode',
-		dependencies = {
-			{ 'nvim-treesitter/nvim-treesitter', lazy = true },
-		},
-		event = 'VeryLazy',
-		config = function()
-			-- Load treesitter grammar for org
-			require('orgmode').setup_ts_grammar()
-
-			-- Setup treesitter
-			require('nvim-treesitter.configs').setup({
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { 'org' },
-				},
-				ensure_installed = { 'org' },
-			})
-
-			-- Setup orgmode
-			require('orgmode').setup({
-				org_agenda_files = '~/notes/**/*',
-				org_default_notes_file = '~/notes/refile.org',
-			})
-		end,
-	},
-
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{ "shaunsingh/solarized.nvim" },
 	{ "FabijanZulj/blame.nvim" },
 	{ "xero/miasma.nvim" },
+	{ "justinmk/vim-sneak" },
 })
