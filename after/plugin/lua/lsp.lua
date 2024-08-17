@@ -5,7 +5,7 @@ lsp.nvim_workspace()
 lsp.preset('recommended')
 
 lsp.ensure_installed({
-	'gopls'
+	-- add here if desired
 })
 
 

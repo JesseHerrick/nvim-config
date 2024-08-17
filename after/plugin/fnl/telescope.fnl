@@ -32,4 +32,4 @@
 		{:find_files
 			{:hidden true}}})
 
-(vim.keymap.set "n" "<leader><leader>" (fn [] (telescope.extensions.frecency.frecency)) {:noremap true :silent true})
+; (vim.keymap.set "n" "<leader><leader>" (fn [] (telescope.extensions.frecency.frecency)) {:noremap true :silent true})

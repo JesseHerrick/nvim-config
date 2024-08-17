@@ -57,8 +57,8 @@ require("lazy").setup({
 
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = '0.1.2',
-		dependencies = { { 'nvim-lua/plenary.nvim' } }
+		tag = '0.1.8',
+		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 
 	{
@@ -70,7 +70,14 @@ require("lazy").setup({
 
 	{ 'nvim-treesitter/nvim-treesitter', build = { ':TSUpdate' } },
 	{ 'nvim-treesitter/playground' },
-	{ 'ThePrimeagen/harpoon' },
+	{
+		'ThePrimeagen/harpoon',
+		branch = 'harpoon2',
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim"
+		}
+	},
 	{ 'mbbill/undotree' },
 	-- 'tpope/vim-fugitive',
 	{
@@ -118,44 +125,28 @@ require("lazy").setup({
 	'tpope/vim-surround',
 	'tpope/vim-projectionist',
 	'sindrets/diffview.nvim',
-	{
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require "telescope".load_extension("frecency")
-		end,
-		dependencies = { "kkharji/sqlite.lua" }
-	},
-	{
-		'prochri/telescope-all-recent.nvim',
-		config = function()
-			require('telescope-all-recent').setup {
-				-- your config goes here
-			}
-		end
-	},
 	-- {
-	-- 	'nvim-telescope/telescope-fzf-native.nvim',
-	-- 	build =
-	-- 	'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-	-- },
-
-	-- {
-	-- 	"harrisoncramer/gitlab.nvim",
-	-- 	dependencies = {
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
-	-- 		enabled = true,
-	-- 	},
-	-- 	build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+	-- 	"nvim-telescope/telescope-frecency.nvim",
 	-- 	config = function()
-	-- 		require("gitlab").setup()                                -- Uses delta reviewer by default
+	-- 		require "telescope".load_extension("frecency")
 	-- 	end,
+	-- 	dependencies = { "kkharji/sqlite.lua" }
 	-- },
 	{ "nvim-treesitter/nvim-treesitter-context" },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{ "shaunsingh/solarized.nvim" },
-	{ "FabijanZulj/blame.nvim" },
+	{
+		"FabijanZulj/blame.nvim",
+		config = function()
+			require("blame").setup()
+		end
+	},
 	{ "xero/miasma.nvim" },
-	{ "justinmk/vim-sneak" },
+	{ "zbirenbaum/copilot.lua" },
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end
+	}
 })

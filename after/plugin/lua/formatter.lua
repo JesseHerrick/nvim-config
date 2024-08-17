@@ -10,6 +10,9 @@ require("formatter").setup {
 		javascript = {
 			require("formatter/defaults/prettier")
 		},
+		json = {
+			require("formatter/defaults/prettier")
+		},
 		typescript = {
 			require("formatter/defaults/prettier")
 		},
