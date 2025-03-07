@@ -3,11 +3,12 @@
 (local actions (require "telescope.actions"))
 (local elixir (require "helpers.elixir"))
 
-(vim.keymap.set "n" "<leader>pf" builtin.find_files)
-(vim.keymap.set "n" "<leader>gf" builtin.git_files {})
+(vim.keymap.set "n" "<leader>pf" builtin.find_files {})
+(vim.keymap.set "n" "<leader>gf" builtin.git_files)
 (vim.keymap.set "n" "<leader>/" builtin.live_grep {})
 (vim.keymap.set "n" "<leader>sl" (fn [] (vim.cmd "Telescope live_grep search_dirs=lib")))
 (vim.keymap.set "n" "<leader>st" (fn [] (vim.cmd "Telescope live_grep search_dirs=test")))
+(vim.keymap.set "n" "<leader>fj" (fn [] (vim.cmd "Telescope jump_list")))
 (vim.keymap.set "n" "<leader>sm"
   (fn []
 		(let [current-module (elixir.current-local-module)]
