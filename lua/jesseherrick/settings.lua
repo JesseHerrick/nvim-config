@@ -20,6 +20,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = nil -- "120"
+vim.opt.signcolumn = "yes:2"
 
 -- folding
 -- vim.opt.foldmethod = "expr"
