@@ -1,2 +1,2 @@
 (let [neogit (require :neogit)]
-	(vim.keymap.set "n" "<leader>gg" (fn [] (neogit.open))))
+	(vim.keymap.set "n" "<leader>gb" (fn [] (neogit.open))))

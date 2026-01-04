@@ -23,6 +23,10 @@ vim.opt.colorcolumn = nil -- "120"
 vim.opt.signcolumn = "yes:2"
 
 -- folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevelstart = 99
+
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.cmd [[autocmd BufReadPost,FileReadPost * normal zR]]

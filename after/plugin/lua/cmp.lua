@@ -1,5 +1,4 @@
 local cmp = require('cmp')
-local cmp_action = require('lsp-zero').cmp_action()
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end

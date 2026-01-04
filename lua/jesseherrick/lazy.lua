@@ -82,17 +82,26 @@ require("lazy").setup({
 	},
 	{ 'mbbill/undotree' },
 	-- 'tpope/vim-fugitive',
+
 	{
 		"NeogitOrg/neogit",
+		lazy = true,
 		dependencies = {
-			"nvim-lua/plenary.nvim",      -- required
-			"sindrets/diffview.nvim",     -- optional - Diff integration
+			"nvim-lua/plenary.nvim", -- required
+			"sindrets/diffview.nvim", -- optional - Diff integration
+
+			-- Only one of these is needed.
 			"nvim-telescope/telescope.nvim", -- optional
+			"ibhagwan/fzf-lua",           -- optional
+			"nvim-mini/mini.pick",        -- optional
+			"folke/snacks.nvim",          -- optional
 		},
-		config = true
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+		}
 	},
 
-	{ "L3MON4D3/LuaSnip" },
 
 	{
 		'hrsh7th/nvim-cmp',
@@ -103,27 +112,14 @@ require("lazy").setup({
 	},
 
 	'mhartington/formatter.nvim',
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
-		dependencies = {
-			-- LSP Support
-			{ 'neovim/nvim-lspconfig' }, -- Required
-			{
-				'williamboman/mason.nvim',
-				config = function()
+	{ 'neovim/nvim-lspconfig' },
+	{ 'williamboman/mason.nvim', },
+	{ 'williamboman/mason-lspconfig.nvim' },
 
-				end
-			},                                    -- Optional
-			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' },  -- Required
-			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
-			{ 'L3MON4D3/LuaSnip' },  -- Required
-		}
-	},
-
+	-- Autocompletion
+	{ 'hrsh7th/nvim-cmp' },    -- Required
+	{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
+	{ 'L3MON4D3/LuaSnip' },    -- Required
 	{
 		'nvim-tree/nvim-tree.lua',
 		dependencies = {
@@ -221,7 +217,16 @@ require("lazy").setup({
 		---@module "ibl"
 		---@type ibl.config
 		opts = {},
-	}
+	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			width = 200
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		}
+	},
 
 	-- AVANTE STUFF
 	--{

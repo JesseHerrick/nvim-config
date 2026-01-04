@@ -6,4 +6,9 @@ local function yank(stuff)
     return print("Nothing to yank.")
   end
 end
-return {yank = yank}
+local function current_file_and_line()
+  local current_file = vim.fn.expand("%")
+  local current_line = vim.fn.line(".")
+  return (current_file .. ":" .. current_line)
+end
+return {yank = yank, ["current-file-and-line"] = current_file_and_line}

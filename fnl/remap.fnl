@@ -1,4 +1,4 @@
-(local {: yank} (require :helpers))
+(local {: yank : current-file-and-line} (require :helpers))
 (local elixir (require "helpers.elixir"))
 
 ; escaping
@@ -16,6 +16,7 @@
 (vim.keymap.set "n" "<leader>k" "<C-w>k")
 (vim.keymap.set "n" "<leader>q" vim.cmd.q)
 (vim.keymap.set "n" "<leader>|" vim.cmd.vsplit)
+(vim.keymap.set "n" "<C-Tab>" (fn [] (vim.cmd "tabNext")))
 
 ; quickfix
 (vim.keymap.set "n" "<leader>'" (fn [] (vim.cmd "copen")))
@@ -42,6 +43,7 @@
 ;; Elixir module helpers
 (vim.keymap.set "n" "<leader>ym" (fn [] (yank (elixir.current-local-module))))
 (vim.keymap.set "n" "<leader>yM" (fn [] (yank (elixir.current-absolute-module))))
+(vim.keymap.set "n" "<leader>ft" (fn [] (elixir.run-elixir-test (current-file-and-line))))
 
 ;; File helpers
 
@@ -49,8 +51,4 @@
 (vim.keymap.set "n" "<leader>yF" (fn [] (yank (vim.fn.expand "%"))))
 
 ; think: "yank file"
-(vim.keymap.set "n" "<leader>yf" (fn []
-																	 (let [current-file (vim.fn.expand "%")
-																				 current-line (vim.fn.line ".")
-																				 file-and-line (.. current-file ":" current-line)]
-																		 (yank file-and-line))))
+(vim.keymap.set "n" "<leader>yf" (fn [] (yank (current-file-and-line))))
