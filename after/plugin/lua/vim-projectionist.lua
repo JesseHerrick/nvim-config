@@ -1,0 +1,1 @@
+vim.keymap.set("n", "<C-c><C-t>", function() vim.cmd("A") end)

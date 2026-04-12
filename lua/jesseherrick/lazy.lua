@@ -1,5 +1,7 @@
+local uv = vim.uv or vim.loop
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -10,30 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 
--- Bootstrap hotpot into lazy plugin dir if it does not exist yet.
-local hotpotpath = vim.fn.stdpath("data") .. "/lazy/hotpot.nvim"
-if not vim.loop.fs_stat(hotpotpath) then
-	vim.notify("Bootstrapping hotpot.nvim...", vim.log.levels.INFO)
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"--single-branch",
-		-- You may wish to pin a known version tag with `--branch=vX.Y.Z`
-		"--branch=v0.9.6",
-		"https://github.com/rktjmp/hotpot.nvim.git",
-		hotpotpath,
-	})
-end
-
--- As per lazy's install instructions, but puts hotpot's path at the front.
-vim.opt.runtimepath:prepend({ hotpotpath, lazypath })
-
-require("hotpot")
+vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
-	{ "rktjmp/hotpot.nvim",   branch = 'main' },
 	{ "folke/which-key.nvim" },
 	{
 		"folke/neoconf.nvim",
@@ -61,6 +43,7 @@ require("lazy").setup({
 		branch = 'master',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
+	{ 'nvim-telescope/telescope-ui-select.nvim' },
 
 	{
 		'sainnhe/gruvbox-material',
@@ -70,8 +53,7 @@ require("lazy").setup({
 	},
 	{ "catppuccin/nvim",                 name = "catppuccin",    priority = 1000 },
 
-	{ 'nvim-treesitter/nvim-treesitter', build = { ':TSUpdate' } },
-	{ 'nvim-treesitter/playground' },
+	{ 'nvim-treesitter/nvim-treesitter', branch = 'main', build = { ':TSUpdate' } },
 	{
 		'ThePrimeagen/harpoon',
 		branch = 'harpoon2',
@@ -138,7 +120,6 @@ require("lazy").setup({
 	-- 	dependencies = { "kkharji/sqlite.lua" }
 	-- },
 	{ "nvim-treesitter/nvim-treesitter-context" },
-	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{ "shaunsingh/solarized.nvim" },
 	{
 		"FabijanZulj/blame.nvim",
@@ -187,7 +168,6 @@ require("lazy").setup({
 		},
 	},
 	{ "pechorin/any-jump.vim" },
-	{ "ludovicchabant/vim-gutentags" },
 	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
@@ -222,83 +202,11 @@ require("lazy").setup({
 		"folke/zen-mode.nvim",
 		opts = {
 			width = 200
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
 		}
 	},
-
-	-- AVANTE STUFF
-	--{
-	--	"yetone/avante.nvim",
-	--	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-	--	-- ⚠️ must add this setting! ! !
-	--	build = function()
-	--		-- conditionally use the correct build system for the current OS
-	--		if vim.fn.has("win32") == 1 then
-	--			return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-	--		else
-	--			return "make"
-	--		end
-	--	end,
-	--	event = "VeryLazy",
-	--	version = false, -- Never set this value to "*"! Never!
-	--	---@module 'avante'
-	--	---@type avante.Config
-	--	opts = {
-	--		-- add any opts here
-	--		-- for example
-	--		provider = "claude",
-	--		providers = {
-	--			claude = {
-	--				endpoint = "https://api.anthropic.com",
-	--				model = "claude-sonnet-4-20250514",
-	--				timeout = 30000, -- Timeout in milliseconds
-	--				extra_request_body = {
-	--					temperature = 0.75,
-	--					max_tokens = 20480,
-	--				},
-	--			},
-	--		},
-	--	},
-	--	dependencies = {
-	--		"nvim-lua/plenary.nvim",
-	--		"MunifTanjim/nui.nvim",
-	--		--- The below dependencies are optional,
-	--		"echasnovski/mini.pick",      -- for file_selector provider mini.pick
-	--		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-	--		"hrsh7th/nvim-cmp",           -- autocompletion for avante commands and mentions
-	--		"ibhagwan/fzf-lua",           -- for file_selector provider fzf
-	--		"stevearc/dressing.nvim",     -- for input provider dressing
-	--		"folke/snacks.nvim",          -- for input provider snacks
-	--		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-	--		"zbirenbaum/copilot.lua",     -- for providers='copilot'
-	--		{
-	--			-- support for image pasting
-	--			"HakonHarnes/img-clip.nvim",
-	--			event = "VeryLazy",
-	--			opts = {
-	--				-- recommended settings
-	--				default = {
-	--					embed_image_as_base64 = false,
-	--					prompt_for_file_name = false,
-	--					drag_and_drop = {
-	--						insert_mode = true,
-	--					},
-	--					-- required for Windows users
-	--					use_absolute_path = true,
-	--				},
-	--			},
-	--		},
-	--		{
-	--			-- Make sure to set this up properly if you have lazy=true
-	--			'MeanderingProgrammer/render-markdown.nvim',
-	--			opts = {
-	--				file_types = { "markdown", "Avante" },
-	--			},
-	--			ft = { "markdown", "Avante" },
-	--		},
-
-	--	},
-	--}
+	{ "EdenEast/nightfox.nvim" },
+	{
+		dir = "~/code/dexter.nvim",
+		opts = { bin = os.getenv("HOME") .. "/code/dexter/dexter" },
+	},
 })

@@ -14,4 +14,3 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 vim.cmd.colorscheme('gruvbox-material')
--- vim.cmd.colorscheme('catppuccin')
