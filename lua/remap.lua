@@ -1,7 +1,8 @@
 local helpers = require("helpers")
 local yank = helpers.yank
 local current_file_and_line = helpers["current-file-and-line"]
-local dexter = require("dexter")
+local elixir_current_module = helpers["elixir-current-module"]
+local elixir_current_local_module = helpers["elixir-current-local-module"]
 
 -- escaping
 vim.keymap.set("x", "<C-g>", "<Esc>")
@@ -38,8 +39,8 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 --- Helpful Yanks ---
 
 -- Elixir module helpers
-vim.keymap.set("n", "<leader>ym", function() yank(dexter.current_local_module()) end)
-vim.keymap.set("n", "<leader>yM", function() yank(dexter.current_module()) end)
+vim.keymap.set("n", "<leader>ym", function() yank(elixir_current_local_module()) end)
+vim.keymap.set("n", "<leader>yM", function() yank(elixir_current_module()) end)
 
 -- Git
 vim.keymap.set("n", "<leader>gb", function() vim.cmd("BlameToggle") end)

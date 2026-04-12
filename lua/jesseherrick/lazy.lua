@@ -205,8 +205,4 @@ require("lazy").setup({
 		}
 	},
 	{ "EdenEast/nightfox.nvim" },
-	{
-		dir = "~/code/dexter.nvim",
-		opts = { bin = os.getenv("HOME") .. "/code/dexter/dexter" },
-	},
 })
