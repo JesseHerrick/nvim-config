@@ -1,7 +1,7 @@
 vim.lsp.config('dexter', {
 	-- cmd = { os.getenv("HOME") .. '/code/dexter/dexter', 'lsp' },
 	cmd = { 'dexter', 'lsp' },
-	root_markers = { '.dexter.db', '.git', 'mix.exs' },
+	root_markers = { '.dexter', '.git', 'mix.exs' },
 	filetypes = { 'elixir', 'eelixir', 'heex' },
 	init_options = {
 		debug = true,
@@ -57,4 +57,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-
